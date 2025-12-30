@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "replitweblog",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # MEDIA_SETTINGS
 
+MEDIA_ROOT = BASE_DIR / "mediafiles"
+
 if DEVELOPMENT_MODE is True:
     MEDIA_URL = "media/"
-    MEDIA_ROOT = BASE_DIR / "mediafiles"
+else:
+    DJANGO_ACCESS_KEY_ID = os.getenv("DJANGO_ACCESS_KEY_ID")
+
+    DJANGO_SECRET_ACCESS_KEY = os.getenv("DJANGO_SECRET_ACCESS_KEY")
+
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+    AWS_ACCESS_KEY_ID = DJANGO_ACCESS_KEY_ID
+
+    AWS_SECRET_ACCESS_KEY = DJANGO_SECRET_ACCESS_KEY
+
+    AWS_STORAGE_BUCKET_NAME = 'replitweblogbucket001'
+
+    AWS_S3_ENDPOINT_URL = 'https://nyc3.digitaloceanspaces.com'
+
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+
+    AWS_LOCATION = "weblog_media"
+
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/"
