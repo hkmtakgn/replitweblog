@@ -1,0 +1,14 @@
+<div class="card">
+  {% if ".mp4" in post.file.url or ".mov" in post.file.url %}
+    <video src="{{ post.file.url }}" controls></video>
+  {% else %}
+    <img src="{{ post.file.url }}" class="card-img-top" alt="{{ post.title }}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+    <a href="{{ post.file.url }}" class="btn btn-primary">Go {{ post.title }}</a>
+  </div>
+</div>
+
+
