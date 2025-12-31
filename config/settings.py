@@ -151,4 +151,4 @@ else:
     STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/static/"
 
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    STATICFILES_DIRS = os.path.join(BASE_DIR, "my_static_files")
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "my_static_files"), )
