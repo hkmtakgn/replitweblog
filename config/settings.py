@@ -109,11 +109,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [
-    BASE_DIR / "my_static_files",
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "my_static_files")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -125,6 +121,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 if DEVELOPMENT_MODE is True:
+    STATIC_URL = 'static/'
+    STATIC_ROOT = BASE_DIR / "staticfiles"
     MEDIA_URL = "media/"
 else:
     DJANGO_ACCESS_KEY_ID = os.getenv("DJANGO_ACCESS_KEY_ID")
@@ -132,6 +130,8 @@ else:
     DJANGO_SECRET_ACCESS_KEY = os.getenv("DJANGO_SECRET_ACCESS_KEY")
 
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     AWS_ACCESS_KEY_ID = DJANGO_ACCESS_KEY_ID
 
@@ -148,3 +148,5 @@ else:
     AWS_LOCATION = "weblog_media"
 
     MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/"
+
+    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/static/"
