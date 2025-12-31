@@ -131,7 +131,7 @@ else:
 
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     AWS_ACCESS_KEY_ID = DJANGO_ACCESS_KEY_ID
 
@@ -150,4 +150,4 @@ else:
 
     MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_MEDIA_LOCATION}/"
 
-    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/static/"
+    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_STATIC_LOCATION}/"
