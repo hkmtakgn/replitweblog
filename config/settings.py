@@ -145,8 +145,9 @@ else:
         'CacheControl': 'max-age=86400',
     }
 
-    AWS_LOCATION = "weblog_media"
+    AWS_MEDIA_LOCATION = "weblog_media"
+    AWS_STATIC_LOCATION = "weblog_static"
 
-    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/"
+    MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_MEDIA_LOCATION}/"
 
     STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/static/"
