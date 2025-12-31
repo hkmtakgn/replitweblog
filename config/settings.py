@@ -109,7 +109,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [
     BASE_DIR / "my_static_files",
@@ -126,6 +125,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 if DEVELOPMENT_MODE is True:
     MEDIA_URL = "media/"
+    STATIC_URL = 'static/'
 else:
     DJANGO_ACCESS_KEY_ID = os.getenv("DJANGO_ACCESS_KEY_ID")
 
@@ -148,3 +148,5 @@ else:
     AWS_LOCATION = "weblog_media"
 
     MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/{AWS_LOCATION}/"
+
+    STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_ENDPOINT_URL}/static/"
